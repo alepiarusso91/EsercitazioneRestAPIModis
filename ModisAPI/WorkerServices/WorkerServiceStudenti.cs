@@ -6,6 +6,21 @@ using System.Threading.Tasks;
 
 namespace ModisAPI.WorkerServices
 {
+    public class WorkerServiceSQLServerDb : IWorkerServiceStudenti
+    {
+        private ModisContext db;
+        public WorkerServiceSQLServerDb() {
+            db = new ModisContext();
+        }
+        public List<Studente> RestituisciListaStudenti()
+        {
+            return db.Studenti.ToList();
+        }
+        public Studente RestituisciStudente(int id)
+        {
+            return db.Studenti.Where(x => x.Id == id).FirstOrDefault();
+        }
+    }
     public class WorkerServiceOracleDb : IWorkerServiceStudenti
     {
         public List<Studente> RestituisciListaStudenti()
