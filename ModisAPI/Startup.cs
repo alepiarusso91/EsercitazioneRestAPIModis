@@ -28,7 +28,13 @@ namespace ModisAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IWorkerServiceStudenti, WorkerServiceSQLServerDb>();
-
+            services.AddSwaggerGen(
+                c => c.SwaggerDoc("v2", new Swashbuckle.AspNetCore.Swagger.Info
+                {
+                    Title = "Modis API",
+                    Version = "v2"
+                })
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +51,14 @@ namespace ModisAPI
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Titolone API v2");
+                }
+                );
+
         }
     }
 }
