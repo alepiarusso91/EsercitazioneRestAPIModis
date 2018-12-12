@@ -13,6 +13,17 @@ namespace ModisAPI.WorkerServices
             db = new ModisContext();
         }
 
+        public void CancellaStudente(int id)
+        {
+            var studente = db.Studenti.Find(id);
+            if(studente !=null)
+            {
+                db.Entry(studente).State =
+                    Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
+
         public void CreaStudente(Studente studente)
         {
             db.Studenti.Add(studente);
@@ -42,6 +53,11 @@ namespace ModisAPI.WorkerServices
     }
     public class WorkerServiceOracleDb : IWorkerServiceStudenti
     {
+        public void CancellaStudente(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreaStudente(Studente studente)
         {
             throw new NotImplementedException();
@@ -65,6 +81,11 @@ namespace ModisAPI.WorkerServices
 
     public class WorkerServiceStudenti : IWorkerServiceStudenti
     {
+        public void CancellaStudente(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreaStudente(Studente studente)
         {
             throw new NotImplementedException();
