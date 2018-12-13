@@ -11,8 +11,8 @@ namespace ModisAPI.WorkerServices
     public class WorkerServiceSQLServerDb : IWorkerServiceStudenti
     {
         private ModisContext db;
-        public WorkerServiceSQLServerDb() {
-            db = new ModisContext();
+        public WorkerServiceSQLServerDb(ModisContext _db) {
+            db = _db;
         }
 
         public void CancellaStudente(int id)
@@ -61,7 +61,7 @@ namespace ModisAPI.WorkerServices
                         Livello = z.Corso.Livello
                     }).ToList()
                 }).ToList();
-                     }
+        }
 
         public Studente RestituisciStudente(int id)
         {
